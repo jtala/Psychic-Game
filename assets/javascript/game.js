@@ -6,24 +6,26 @@ var losses = 0;
 
 // There are 10 guesses to start.
 var guesses = 10;
-var storeGuesses = " ";
+var storeGuesses = [];
 
-// We need to create variables that hold references to the HTML where we display things.
-    var winsText = document.getElementById("wins-text");
-    var lossesText = document.getElementById("losses-text");
-    var guessesLeftText = document.getElementById("guessesleft-text");
-    var storeGuessesText = document.getElementById("storeguesses-text");
 
 
 // Generating computer's array of letters.
  var alphabet= ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-// An event is triggered when the user presses a button.
+
+ var compGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+ // An event is triggered when the user presses a button.
 
 document.onkeyup = function(event) {
     var userGuess = event.key;
+    storeGuesses.push(userGuess);
+    
 
-    // Computer input randomly generates an alphabet letter. Hidden to user.
-    var compGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+    // Computer input randomly generates an alphabet letter.
+        // Checking what the computer guess is.
+
+        console.log(compGuess);
 
     //  if user guess === computer guess
     if (userGuess === compGuess) {
@@ -33,9 +35,10 @@ document.onkeyup = function(event) {
         //reset lives to 10.
         guesses = 10;
         // clears currently stored User Guesses.
-        storeGuesses = " ";
+        storeGuesses = [];
          //computer generates new random letter, loop starts over again.
-        compGuess;
+         compGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+        // compGuess;
 
     }
         
@@ -48,34 +51,33 @@ document.onkeyup = function(event) {
         console.log("Incorrect entry");
 
         // store the incorrect guess into the userguess
-        storeGuesses = userGuess + ",";
         
          // if lives decrease to 0, add a loss.
-         if (guesses = 0){
+         if (guesses === 0) {
              losses++;
 
-        //Clear storage of guesses.
-        storeGuesses = " ";
+            //Clear storage of guesses.
+            storeGuesses = [];
         
-        // computer genereates new random letter.
-            compGuess;
+            // computer genereates new random letter.
+            // compGuess;
 
-         }
-    
-    
-     }  
-    
-    }
+        }
+    } 
+    document.getElementById("wins-text").textContent = wins;
+    document.getElementById("losses-text").textContent = losses;
+    document.getElementById("guessesleft-text").textContent = guesses;
+    document.getElementById("storeguesses-text").textContent = storeGuesses;
 
-
+};
     // Display the wins, losses, guess count, and used guesses so far.
 
       
       
-        winsText.textContent = "wins: " + wins ;
-        lossesText.textContent = "losses: " + losses;
-        guessesLeftText.textContent = "Guesses Left: " + guesses;
-        storeGuessesText.textContent = "Your guesses so far: "+ storeGuesses;
+        // winsText.textContent = "wins: " + wins ;
+        // lossesText.textContent = "losses: " + losses;
+        // guessesLeftText.textContent = "Guesses Left: " + guesses;
+        // storeGuessesText.textContent = "Your guesses so far: "+ storeGuesses;
 
 
 
